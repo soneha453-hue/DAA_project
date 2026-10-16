@@ -7,7 +7,7 @@ import time
 with open("graph.pkl", "rb") as f:
     adj, coords = pickle.load(f)
 
-# 2. Haversine (meters), nearest node ke liye
+# 2. Haversine (meters), for nearest node 
 def haversine(lat1, lon1, lat2, lon2):
     R = 6371000.0
     p1, p2 = math.radians(lat1), math.radians(lat2)
@@ -23,16 +23,16 @@ def nearest_node(lat, lon):
 def dijkstra(adj, S, D):
     dist = {S: 0.0}
     parent = {S: None}
-    done = set()                 # finalize hue vertices
+    done = set()                 # finalize  vertices
     heap = [(0.0, S)]
     edges_examined = 0
 
     while heap:
         d, u = heapq.heappop(heap)
-        if u in done:            # purani (stale) entry, skip
+        if u in done:            # old (stale) entry, skip
             continue
         done.add(u)
-        if u == D:               # destination mil gaya
+        if u == D:               # found destination 
             break
         for v, w in adj[u]:
             edges_examined += 1
@@ -46,7 +46,7 @@ def dijkstra(adj, S, D):
         return None, None, len(done), edges_examined
     return dist[D], parent, len(done), edges_examined
 
-# 4. Path reconstruction: D se S tak parent follow karo
+# 4. Path reconstruction: D to S 
 def build_path(parent, S, D):
     path = []
     cur = D
