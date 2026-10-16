@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+graph.pkl
+.vscode/.vscode/
+test_osm.py
+.vscode/
+test_osm.py
+.vscode/
+test_osm.py
+cache/
